@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.grc.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools-scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dns-benchmark-laboratory"
+version = "1.0.0"
+description = "Advanced DNS performance testing tool with modern UI"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "DNS Benchmark Laboratory", email = "contact@dnsbenchmarklaboratory.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Developers",
+    "Topic :: Internet :: Name Service (DNS)",
+    "Topic :: System :: Networking :: Monitoring",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "customtkinter>=5.2.0",
+    "dnspython>=2.4.0",
+    "matplotlib>=3.7.0",
+    "numpy>=1.24.0",
+    "requests>=2.31.0",
+    "psutil>=5.9.0",
+    "pillow>=10.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.20.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "mypy>=0.991",
+]
+
+[project.scripts]
+dns-benchmark = "main:main"
+dns-benchmark-laboratory = "main:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/dns-benchmark-pro"
+Repository = "https://github.com/yourusername/dns-benchmark-pro.git"
+Issues = "https://github.com/yourusername/dns-benchmark-pro/issues"
+Documentation = "https://github.com/yourusername/dns-benchmark-pro/blob/main/README.md"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
