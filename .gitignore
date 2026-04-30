@@ -178,3 +178,8 @@ Desktop.ini
 results/
 logs/
 temp/
+
+# Claude AI files
+CLAUDE.md
+claude.md
+agents.md

@@ -437,19 +437,19 @@ class DNSBenchmarkApp:
         # Statistics container
         stats_container = ctk.CTkFrame(
             self.content_container,
-            fg_color=self.colors['surface_container_low'],
-            corner_radius=12,
-            border_width=1,
-            border_color=self.colors['outline_variant']
+            fg_color="transparent"
         )
+        stats_container.grid_columnconfigure(0, weight=1)
+        stats_container.grid_columnconfigure(1, weight=1)
+        stats_container.grid_rowconfigure(0, weight=1)
         
-        # Statistics panel
+        # Statistics panel (left side)
         statistics_frame = StatisticsPanel(stats_container, self)
-        statistics_frame.pack(fill="both", expand=True, padx=15, pady=15)
+        statistics_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 10))
         
-        # Graphs panel
+        # Graphs panel (right side)
         graphs_frame = GraphsPanel(stats_container, self)
-        graphs_frame.pack(fill="both", expand=True, padx=15, pady=15)
+        graphs_frame.grid(row=0, column=1, sticky="nsew", padx=(10, 0))
         
         # Store components for persistent access
         self.tab_components["statistics"] = {
@@ -1606,6 +1606,41 @@ class DNSBenchmarkApp:
         # For now, we'll just track which servers are responding
         pass
     
+    def update_network_map_final_results(self, rankings):
+        """Update network map with final benchmark results"""
+        if not rankings or "network_map" not in self.tab_components:
+            return
+            
+        try:
+            # Update server status indicators with performance data
+            if hasattr(self, 'network_server_items'):
+                for server_stats in rankings:
+                    server_ip = server_stats.server.ip
+                    if server_ip in self.network_server_items:
+                        server_item = self.network_server_items[server_ip]
+                        
+                        # Update status based on performance
+                        if server_stats.avg_response_time < 50:
+                            status = "excellent"
+                            color = self.colors['success']
+                        elif server_stats.avg_response_time < 100:
+                            status = "good"
+                            color = self.colors['warning']
+                        else:
+                            status = "slow"
+                            color = self.colors['error']
+                        
+                        # Update UI elements
+                        if 'status_label' in server_item:
+                            server_item['status_label'].configure(text_color=color)
+                        if 'latency_label' in server_item:
+                            server_item['latency_label'].configure(
+                                text=f"{server_stats.avg_response_time:.1f}ms"
+                            )
+        except Exception as e:
+            # Fail silently to not interrupt the UI
+            pass
+    
     def update_security_metrics(self, result):
         """Update security metrics based on benchmark results"""
         if not result or not hasattr(self, 'security_test_items'):
@@ -1763,6 +1798,10 @@ class DNSBenchmarkApp:
             graphs_frame = self.tab_components["statistics"].get("graphs_frame")
             if graphs_frame and hasattr(graphs_frame, 'update_graphs'):
                 graphs_frame.update_graphs(rankings)
+        
+        # Update network map if it exists
+        if "network_map" in self.tab_components:
+            self.update_network_map_final_results(rankings)
         
         # Calculate stats
         total_queries = len(self.benchmark_engine.results)

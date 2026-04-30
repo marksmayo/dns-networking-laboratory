@@ -159,6 +159,33 @@ src/
 - Streaming updates to charts and statistics
 - Efficient data structures for performance metrics
 
+## 📸 Application Screenshots
+
+### Dashboard - Main Benchmarking Interface
+The primary interface for DNS server selection, benchmark configuration, and real-time results monitoring.
+
+![Dashboard](screenshots/01_dashboard.png)
+
+### Dashboard with Results
+Live benchmark results displaying response times, reliability scores, and performance rankings.
+
+![Dashboard with Results](screenshots/02_dashboard_results.png)
+
+### Statistics & Analytics
+Comprehensive performance statistics with advanced charts, percentile analysis, and provider comparisons.
+
+![Statistics](screenshots/03_statistics.png)
+
+### Network Map Visualization
+Global DNS network topology with visual server distribution and real-time status indicators.
+
+![Network Map](screenshots/04_network_map.png)
+
+### Security Analysis
+Advanced security testing interface for DNSSEC validation, encrypted DNS detection, and privacy analysis.
+
+![Security Analysis](screenshots/05_security.png)
+
 ## 📋 Usage Guide
 
 ### Basic Benchmarking
