@@ -446,6 +446,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+![Alt](https://repobeats.axiom.co/api/embed/8645f18e2af793d345aa1d350d08cd784f543e1d.svg "Repobeats analytics image")
 **Built with ❤️ for network administrators, security professionals, and DNS enthusiasts worldwide.**
 
 *DNS Benchmark Laboratory - Professional DNS Performance Analysis & Security Testing*
